@@ -32,9 +32,9 @@ function owoBig() {
                         flag = 0;
                         // 移入300毫秒后显示盒子
                         owo_time = setTimeout(() => {
-                            let height = e.path[0].clientHeight * m, // 盒子高
-                                width = e.path[0].clientWidth * m, // 盒子宽
-                                left = (e.x - e.offsetX) - (width - e.path[0].clientWidth) / 2, // 盒子与屏幕左边距离
+                            let height = e.target.clientHeight * m, // 盒子高 2023-02-16更新
+                                width = e.target.clientWidth * m, // 盒子宽 2023-02-16更新
+                                left = (e.x - e.offsetX) - (width - e.target.clientWidth) / 2, // 盒子与屏幕左边距离 2023-02-16更新
                                 top = e.y - e.offsetY; // 盒子与屏幕顶部距离
 
                             if ((left + width) > body.clientWidth) left -= ((left + width) - body.clientWidth + 10); // 右边缘检测，防止超出屏幕
