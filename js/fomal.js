@@ -3473,7 +3473,7 @@ function createWinbox() {
 </div>
 
 </div>
-
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f4cfa77256f14899bba32faaf0949f99"}'></script><!-- End Cloudflare Web Analytics -->
 `;
 
   // 打开小窗时候初始化
