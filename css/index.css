@@ -7701,13 +7701,13 @@ button#go-up:hover #percent {
 
 /* 个人信息卡片背景图 */
 [data-theme="light"] #aside-content > .card-widget.card-info {
-  background-image: url(https://img.qwqsky.top/background/92968709_p0_master1200.jpg);
+  background-image: url(https://img.qwqsky.top/background/123214319_p0_tra.png);
   background-repeat: no-repeat;
   background-attachment: inherit;
   background-size: 100%;
 }
 [data-theme="dark"] #aside-content > .card-widget.card-info {
-  background-image: url(https://img.qwqsky.top/background/92968709_p0_master1200.jpg);
+  background-image: url(https://img.qwqsky.top/background/102097784_p0_tra.png);
   background-repeat: no-repeat;
   background-attachment: inherit;
   background-size: 100%;

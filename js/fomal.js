@@ -1320,11 +1320,11 @@ var titleTime;
 document.addEventListener('visibilitychange', function () {
   if (document.hidden) {
     //离开当前页面时标签显示内容
-    document.title = '👀跑哪里去了~';
+    document.title = '啊！(,,•́Д•̀,,)坏掉了';
     clearTimeout(titleTime);
   } else {
     //返回当前页面时标签显示内容
-    document.title = '🐖抓到你啦～';
+    document.title = 'Ciallo～(∠・ω༨ )⌒★';
     //两秒后变回正常标题
     titleTime = setTimeout(function () {
       document.title = OriginTitile;
@@ -2949,7 +2949,7 @@ function setFontBorder() {
 
 // 设置主题色
 if (localStorage.getItem("themeColor") == undefined) {
-  localStorage.setItem("themeColor", "green");
+  localStorage.setItem("themeColor", "blue");
 }
 setColor(localStorage.getItem("themeColor"));
 function setColor(c) {
