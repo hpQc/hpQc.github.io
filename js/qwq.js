@@ -28,17 +28,8 @@ const css = `
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
   border-color: #007bff;
 }
-@media screen and (min-width: 1024px) {
-    .tk-master .tk-avatar {
-        position: relative;
-        left: 0!important;
-    }
-}
-@media screen and (min-width: 1024px) {
-    .tk-master .tk-content {
-        width: fit-content!important;
-    }
-}
+
+  
 .recent-post-item:nth-child(2){
     display: none;/*隐藏多余冰箱贴*/
 }
