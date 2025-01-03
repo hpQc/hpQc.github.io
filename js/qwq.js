@@ -28,8 +28,6 @@ const css = `
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
   border-color: #007bff;
 }
-
-  
 .recent-post-item:nth-child(2){
     display: none;/*隐藏多余冰箱贴*/
 }
@@ -42,14 +40,10 @@ const css = `
     transition-delay: 0s;
 }
 `;
-
-
-
 // 将 CSS 添加到页面
 const style = document.createElement('style');
 style.innerHTML = css;
 document.head.appendChild(style);
-
 //翻译提醒通知
 // 创建通知容器
 function createNotificationContainer() {
@@ -58,27 +52,27 @@ function createNotificationContainer() {
     notificationContainer = document.createElement('div');
     notificationContainer.id = 'translate-notification';
     notificationContainer.style.cssText = `
-      position: fixed;
-      width: 50%;
-      bottom: 10%;
-      right: 25%;
-      margin:auto;
-      background: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 14px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 10000;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+    position: fixed;
+    width: 50%;
+    min-height: 50px;
+    bottom: 10%;
+    right: 25%;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     `;
     document.body.appendChild(notificationContainer);
   }
   return notificationContainer;
 }
-
 // 显示通知
 function showNotification(message, duration = 5000) {
   const notification = createNotificationContainer();
@@ -96,7 +90,6 @@ function showNotification(message, duration = 5000) {
     }, duration);
   }
 }
-
 // 隐藏通知
 function dismissNotification() {
   const notification = document.getElementById('translate-notification');
@@ -110,7 +103,6 @@ function dismissNotification() {
     }, 300);
   }
 }
-
 // 提示浏览器翻译功能
 function promptBrowserTranslate(targetLanguage) {
   const userLanguage = navigator.language || navigator.userLanguage;
