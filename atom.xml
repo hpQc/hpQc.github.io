@@ -6,7 +6,7 @@
   <link href="https://blog.qwqsky.top/atom.xml" rel="self"/>
   
   <link href="https://blog.qwqsky.top/"/>
-  <updated>2025-07-12T09:02:34.332Z</updated>
+  <updated>2025-08-03T17:41:17.836Z</updated>
   <id>https://blog.qwqsky.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://blog.qwqsky.top/posts/e2e905df.html"/>
     <id>https://blog.qwqsky.top/posts/e2e905df.html</id>
     <published>2025-07-12T08:27:46.000Z</published>
-    <updated>2025-07-12T09:02:34.332Z</updated>
+    <updated>2025-08-03T17:41:17.836Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>前几天心血来潮想剪辑游戏高光视频，从酷狗感念版上下载的音乐文件kgm文件无法在导入PR。</p><div class="hide-block"><button type="button" class="hide-button" style="background-color:  blue;">点我预览    </button><div class="hide-content"><img src="https://img.qwqsky.top/page/屏幕截图 2025-07-12 165434.png" alt="失败导入" style="zoom:67%;" /></div></div><h2 id="解决方法">解决方法</h2><p>利用<a href="https://git.unlock-music.dev/um/web">Unlock Music 音乐解锁</a>项目将kgm文件转换成flac文件,成功将音乐导入PR。</p><div class="hide-block"><button type="button" class="hide-button" style="background-color:  blue;">点我预览    </button><div class="hide-content"><img src="https://img.qwqsky.top/page/屏幕截图 2025-07-12 165523.png" alt="转换" style="zoom:67%;" /></div></div><div class="hide-block"><button type="button" class="hide-button" style="background-color:  blue;">点我预览    </button><div class="hide-content"><img src="https://img.qwqsky.top/page/屏幕截图 2025-07-12 165456.png" alt="转换" style="zoom:67%;" /></div></div><p><a href="https://demo.unlock-music.dev/">音乐解锁（本家）</a><br><a href="https://music.qwqsky.top/">音乐解锁（站长部署）</a></p><h3 id="Unlock-Music-音乐解锁">Unlock Music 音乐解锁</h3><h4 id="支持的格式">支持的格式</h4><ul><li>QQ 音乐 (.qmc0/.qmc2/.qmc3/.qmcflac/.qmcogg/.tkm)</li><li>Moo 音乐格式 (.bkcmp3/.bkcflac/…)</li><li>QQ 音乐 Tm 格式 (.tm0/.tm2/.tm3/.tm6)</li><li>QQ 音乐新格式 (.mflac/.mgg/.mflac0/.mgg1/.mggl)</li><li><ruby>QQ 音乐海外版<rt>JOOX Music</rt></ruby> (.ofl_en)</li><li>网易云音乐格式 (.ncm)</li><li>虾米音乐格式 (.xm)</li><li>酷我音乐格式 (.kwm)</li><li>酷狗音乐格式 (.kgm/.vpr)</li><li>Android 版喜马拉雅文件格式 (.x2m/.x3m)</li><li>咪咕音乐格式 (.mg3d)</li></ul><h4 id="其他特性">其他特性</h4><ul><li>在浏览器中解锁</li><li>拖放文件</li><li>批量解锁</li><li>渐进式 Web 应用 (PWA)</li><li>多线程</li><li>写入和编辑元信息与专辑封面</li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="前言">前言</h2><p>前几天心血来潮想剪辑游戏高光视频，从酷狗感念版上下载的音乐文件kgm文件无法在导入PR。</p><div class="hide-block"><button type="button" class="hide-button" style="background-color:  blue;">点我预览    </button><div class="hide-content"><img src="https://img.qwqsky.top/page/屏幕截图 2025-07-12 165434.png" alt="失败导入" style="zoom:67%;" /></div></div><h2 id="解决方法">解决方法</h2><p>利用<a href="https://git.unlock-music.dev/um/web">Unlock Music 音乐解锁</a>项目将kgm文件转换成flac文件,成功将音乐导入PR。</p><div class="hide-block"><button type="button" class="hide-button" style="background-color:  blue;">点我预览    </button><div class="hide-content"><img src="https://img.qwqsky.top/page/屏幕截图 2025-07-12 165523.png" alt="转换" style="zoom:67%;" /></div></div><div class="hide-block"><button type="button" class="hide-button" style="background-color:  blue;">点我预览    </button><div class="hide-content"><img src="https://img.qwqsky.top/page/屏幕截图 2025-07-12 165456.png" alt="转换" style="zoom:67%;" /></div></div><p><a href="https://demo.unlock-music.dev/">音乐解锁（本家）</a><br><a href="https://unlockmusic.qwqsky.top/">音乐解锁（站长部署）</a></p><h3 id="Unlock-Music-音乐解锁">Unlock Music 音乐解锁</h3><h4 id="支持的格式">支持的格式</h4><ul><li>QQ 音乐 (.qmc0/.qmc2/.qmc3/.qmcflac/.qmcogg/.tkm)</li><li>Moo 音乐格式 (.bkcmp3/.bkcflac/…)</li><li>QQ 音乐 Tm 格式 (.tm0/.tm2/.tm3/.tm6)</li><li>QQ 音乐新格式 (.mflac/.mgg/.mflac0/.mgg1/.mggl)</li><li><ruby>QQ 音乐海外版<rt>JOOX Music</rt></ruby> (.ofl_en)</li><li>网易云音乐格式 (.ncm)</li><li>虾米音乐格式 (.xm)</li><li>酷我音乐格式 (.kwm)</li><li>酷狗音乐格式 (.kgm/.vpr)</li><li>Android 版喜马拉雅文件格式 (.x2m/.x3m)</li><li>咪咕音乐格式 (.mg3d)</li></ul><h4 id="其他特性">其他特性</h4><ul><li>在浏览器中解锁</li><li>拖放文件</li><li>批量解锁</li><li>渐进式 Web 应用 (PWA)</li><li>多线程</li><li>写入和编辑元信息与专辑封面</li></ul>]]></content>
     
     
     <summary type="html">本文描述了将音乐软件下载文件用于剪辑视频时音乐处理</summary>
