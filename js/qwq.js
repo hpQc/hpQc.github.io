@@ -39,6 +39,99 @@ const css = `
     left:0!important;
     transition-delay: 0s;
 }
+/*aplayer日间模式调整*/
+/*背景色*/
+.aplayer{
+	background: rgba(255, 255, 255, 0.60)!important;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.07),0 1px 5px 0 rgba(0,0,0,.1);
+	position: relative;
+}
+.aplayer.aplayer-fixed .aplayer-lrc:after,.aplayer.aplayer-fixed .aplayer-lrc:before {
+	display: none
+}
+.aplayer.aplayer.aplayer-fixed .aplayer-body{
+	background:rgba(255, 255, 255, 0.60)!important;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.07),0 1px 5px 0 rgba(0,0,0,.1);
+	position: fixed;
+}
+/*毛玻璃效果*/
+.aplayer-list{
+	backdrop-filter: blur(3px);
+}
+.aplayer-info{
+	backdrop-filter: blur(3px);
+}
+/*滚动条*/
+.aplayer .aplayer-list ol::-webkit-scrollbar {
+	width: 5px
+}
+.aplayer .aplayer-list ol::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background-color: #b0e1ff
+}
+.aplayer .aplayer-list ol::-webkit-scrollbar-thumb:hover {
+	background-color: #b0e1ff
+}
+/*圆角*/
+.aplayer.aplayer-fixed .aplayer-list{
+    border-radius: 6px 6px 0 0!important;
+}
+.aplayer.aplayer-fixed .aplayer-miniswitcher{
+    border-radius: 0 6px 6px 0!important;
+}
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body{
+    border-radius: 6px!important;
+}	
+.aplayer-body{
+    border-radius:0 6px 6px 0!important;
+}
+.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed{
+    border-radius:6px 6px 0 0!important;
+}
+/*选中与播放中歌曲激活颜色*/
+.aplayer .aplayer-list ol li:hover{
+    background: #b0e1ff!important;
+}
+.aplayer .aplayer-list ol li.aplayer-list-light{
+    background: #ffdffa!important;
+}
+/*aplayer黑暗模式*/
+[data-theme=dark]
+.aplayer{
+    background: rgba(22, 22, 22, 0.60)!important;
+    color: rgb(255, 255, 255);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.07),0 1px 5px 0 rgba(0,0,0,.1);
+}
+[data-theme=dark]
+.aplayer.aplayer-fixed .aplayer-body{
+    background: rgba(22, 22, 22, 0.60)!important;
+    color: rgb(255, 255, 255);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.07),0 1px 5px 0 rgba(0,0,0,.1);
+}
+[data-theme=dark]
+.aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{
+	fill: #d4d4d4;
+}
+[data-theme=dark]	
+.aplayer .aplayer-list ol li:hover{
+    background: #407290!important;
+}
+[data-theme=dark]
+.aplayer .aplayer-list ol li.aplayer-list-light{
+    background: #9c8098!important;
+}
+[data-theme=dark]
+.aplayer .aplayer-info .aplayer-controller .aplayer-time{
+    color: #d4d4d4;
+}
+[data-theme=dark]
+.aplayer .aplayer-list ol li .aplayer-list-index{
+    color: #d4d4d4;
+}
+[data-theme=dark]
+.aplayer .aplayer-list ol li .aplayer-list-author{
+    color: #d4d4d4;
+}
 `;
 // 将 CSS 添加到页面
 const style = document.createElement('style');
@@ -189,7 +282,7 @@ function languageBox() {
 }
 
 //翻译
-translate.selectLanguageTag.languages = 'english,chinese_simplified,korean,Japanese,chinese_traditional';
+translate.selectLanguageTag.languages = 'english,chinese_simplified,korean,Japanese';
 translate.request.listener.start();
 translate.language.setLocal('chinese_simplified'); //设置本地语种（当前网页的语种）。如果不设置，默认自动识别当前网页显示文字的语种。 可填写如 'english'、'chinese_simplified' 等，具体参见文档下方关于此的说明。
 translate.service.use('client.edge'); //设置机器翻译服务通道，直接客户端本身，不依赖服务端 。相关说明参考 http://translate.zvo.cn/43086.html

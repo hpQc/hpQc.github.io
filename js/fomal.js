@@ -3462,12 +3462,12 @@ function createWinbox() {
   } else {
     document.getElementById("lightSet").checked = false;
   }
-  setFontBorder();
   if (localStorage.getItem("snow") == "block") {
     document.getElementById("snowSet").checked = true;
   } else if (localStorage.getItem("snow") == "none") {
     document.getElementById("snowSet").checked = false;
   }
+  setFontBorder();
 }
 
 // 恢复默认背景
