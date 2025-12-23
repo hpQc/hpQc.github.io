@@ -39,6 +39,12 @@ const css = `
     left:0!important;
     transition-delay: 0s;
 }
+.aplayer .aplayer-body{
+    bottom: 36px !important;
+}
+.aplayer.no-destroy.no-reload.aplayer-withlist.aplayer-fixed{
+  bottom: 36px !important;
+}
 /*aplayer日间模式调整*/
 /*背景色*/
 .aplayer{
@@ -131,6 +137,9 @@ const css = `
 [data-theme=dark]
 .aplayer .aplayer-list ol li .aplayer-list-author{
     color: #d4d4d4;
+}
+.thumbnail{
+    border-radius: 10px;
 }
 `;
 // 将 CSS 添加到页面
