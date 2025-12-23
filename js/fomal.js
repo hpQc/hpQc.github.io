@@ -2823,6 +2823,27 @@ setInterval(() => {
 
 /* fps检测 start */
 if (window.localStorage.getItem("fpson") == undefined || window.localStorage.getItem("fpson") == "1") {
+  var fpsEl = document.getElementById("fps");
+  var isConfirming = false; // 新增：是否处于确认关闭状态
+
+  // 点击事件处理
+  fpsEl.onclick = function (e) {
+    e.stopPropagation();
+    if (e.target.id === 'fps_close_yes') {
+      // 点击对号：隐藏
+      fpsEl.style.display = "none";
+    } else if (e.target.id === 'fps_close_no') {
+      // 点击错号：恢复
+      isConfirming = false;
+    } else {
+      // 点击原本内容：进入确认模式
+      if (!isConfirming) {
+        isConfirming = true;
+        fpsEl.innerHTML = `关闭检测？ <span id="fps_close_yes" style="cursor:pointer;margin-left:4px" title="确认">✅</span><span id="fps_close_no" style="cursor:pointer;margin-left:8px" title="取消">❌</span>`;
+      }
+    }
+  };
+
   var rAF = function () {
     return (
       window.requestAnimationFrame ||
@@ -2832,36 +2853,33 @@ if (window.localStorage.getItem("fpson") == undefined || window.localStorage.get
       }
     );
   }();
+
   var frame = 0;
-  var allFrameCount = 0;
   var lastTime = Date.now();
   var lastFameTime = Date.now();
+
   var loop = function () {
     var now = Date.now();
     var fs = (now - lastFameTime);
-    var fps = Math.round(1000 / fs);
-
     lastFameTime = now;
-    // 不置 0，在动画的开头及结尾记录此值的差值算出 FPS
-    allFrameCount++;
     frame++;
 
     if (now > 1000 + lastTime) {
       var fps = Math.round((frame * 1000) / (now - lastTime));
-      if (fps <= 5) {
-        var kd = `<span style="color:#bd0000">卡成ppt🤢</span>`
-      } else if (fps <= 15) {
-        var kd = `<span style="color:red">电竞级帧率😖</span>`
-      } else if (fps <= 25) {
-        var kd = `<span style="color:orange">有点难受😨</span>`
-      } else if (fps < 35) {
-        var kd = `<span style="color:#9338e6">不太流畅🙄</span>`
-      } else if (fps <= 45) {
-        var kd = `<span style="color:#08b7e4">还不错哦😁</span>`
-      } else {
-        var kd = `<span style="color:#39c5bb">十分流畅🤣</span>`
+      
+      // 如果处于确认模式，不更新 HTML，避免覆盖按钮
+      if (!isConfirming) {
+        var kd = "";
+        if (fps <= 5) { kd = `<span style="color:#bd0000">卡成ppt🤢</span>` } 
+        else if (fps <= 15) { kd = `<span style="color:red">电竞级帧率😖</span>` } 
+        else if (fps <= 25) { kd = `<span style="color:orange">有点难受😨</span>` } 
+        else if (fps < 35) { kd = `<span style="color:#9338e6">不太流畅🙄</span>` } 
+        else if (fps <= 45) { kd = `<span style="color:#08b7e4">还不错哦😁</span>` } 
+        else { kd = `<span style="color:#39c5bb">十分流畅🤣</span>` }
+        
+        fpsEl.innerHTML = `FPS:${fps} ${kd}`;
       }
-      document.getElementById("fps").innerHTML = `FPS:${fps} ${kd}`;
+      
       frame = 0;
       lastTime = now;
     };
@@ -3428,7 +3446,6 @@ function createWinbox() {
               <p><center><input type="text" id="pic-link" size="70%" maxlength="1000" placeholder="请输入有效的图片链接，如 https://source.fomal.cc/img/home_bg.webp"></center></p><p><center><button type="button" onclick="getPicture()" style="background:var(--theme-color);width:35%;padding: 5px 0px 7px 0px;border-radius:30px;color:white;line-height:2;">🌈切换背景🌈</button></center></p>
               </div>
             </details>
-
 <br>
 <center><div style="font-size:1.2em;color:var(--theme-color);font-weight:bold;">------ ( •̀ ω •́ )y 到底啦 ------</div></center>
 <br>

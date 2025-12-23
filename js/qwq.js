@@ -296,3 +296,72 @@ translate.request.listener.start();
 translate.language.setLocal('chinese_simplified'); //设置本地语种（当前网页的语种）。如果不设置，默认自动识别当前网页显示文字的语种。 可填写如 'english'、'chinese_simplified' 等，具体参见文档下方关于此的说明。
 translate.service.use('client.edge'); //设置机器翻译服务通道，直接客户端本身，不依赖服务端 。相关说明参考 http://translate.zvo.cn/43086.html
 translate.execute();//进行翻译
+
+//关闭歌曲列表
+(function() {
+  const initAPlayerSmooth = () => {
+    const container = document.querySelector('.aplayer-fixed');
+    if (!container) return;
+
+    const switcher = container.querySelector('.aplayer-miniswitcher');
+    const menuBtn = container.querySelector('.aplayer-icon-menu');
+    const listEl = container.querySelector('.aplayer-list');
+    const bodyEl = container.querySelector('.aplayer-body'); // 获取主体以操作 transition-delay
+    
+    let isInternalClick = false; // 防死循环标记
+
+    switcher.addEventListener('click', function(e) {
+      if (isInternalClick) return;
+
+      // 1. 判断播放器当前是否展开 (非 narrow 状态)
+      const isPlayerExpanded = !container.classList.contains('aplayer-narrow');
+      
+      // 2. 物理高度检查：判断列表是否真的在显示
+      // 如果 offsetHeight 大于 5（留点误差余量），说明列表是打开状态
+      const isListOpen = listEl && listEl.offsetHeight > 5;
+
+      if (isPlayerExpanded) {
+        // 如果列表开着，我们需要先处理列表
+        if (isListOpen) {
+          // 拦截本次原生的折叠动作
+          e.stopImmediatePropagation();
+          e.preventDefault();
+
+          // 【新增】执行期间屏蔽 2s 延迟，设置为 0s 立即响应
+          if (bodyEl) {
+            bodyEl.style.setProperty('transition-delay', '0s', 'important');
+          }
+
+          // 模拟点击菜单按钮关闭列表（触发 CSS 的 max-height 动画）
+          menuBtn.click();
+
+          // 开启标记，等待动画结束后触发真正的折叠
+          isInternalClick = true;
+          setTimeout(() => {
+            switcher.click();
+            isInternalClick = false;
+
+            // 【新增】执行完折叠动作后，恢复原来的 transition-delay
+            // 延迟 500ms 是为了确保收缩动画彻底完成后再移除样式
+            setTimeout(() => {
+              if (bodyEl) {
+                bodyEl.style.removeProperty('transition-delay');
+              }
+            }, 400);
+
+          }, 400); // 400ms 对应 CSS 中的 transition 时间
+        } 
+        // 如果列表本来就是关的 (offsetHeight <= 5)，则不拦截，直接走原生折叠
+      }
+    }, true); // 使用捕获阶段
+  };
+
+  // 轮询确保 APlayer 加载完成
+  const checkAPlayer = setInterval(() => {
+    const switcher = document.querySelector('.aplayer-fixed .aplayer-miniswitcher');
+    if (switcher) {
+      initAPlayerSmooth();
+      clearInterval(checkAPlayer);
+    }
+  }, 500);
+})();
