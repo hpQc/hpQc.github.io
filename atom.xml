@@ -6,7 +6,7 @@
   <link href="https://blog.qwqsky.top/atom.xml" rel="self"/>
   
   <link href="https://blog.qwqsky.top/"/>
-  <updated>2026-11-16T14:54:34.354Z</updated>
+  <updated>2026-11-16T15:03:46.364Z</updated>
   <id>https://blog.qwqsky.top/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.qwqsky.top/posts/f465d745.html"/>
     <id>https://blog.qwqsky.top/posts/f465d745.html</id>
     <published>2026-11-16T14:30:00.000Z</published>
-    <updated>2026-11-16T14:54:34.354Z</updated>
+    <updated>2026-11-16T15:03:46.364Z</updated>
     
     <content type="html"><![CDATA[<p>迁移到 Hexo 8.1 后，站里有几处细节慢慢偏离了旧站：播放器样式被改、统计页的 Umami 看板被浏览器拦截、页脚徽章丢了旧版图案，右下角的繁简按钮也点不动。这次集中做了一轮整修，记录如下。</p><h2 id="一、APlayer-回到旧站样式">一、APlayer 回到旧站样式</h2><ul><li>八音盒里的内嵌 APlayer 恢复主题原本的圆角、主题色高亮和背景，不再被 <code>qwq.js</code> 里的旧教程样式全局覆盖。</li><li>左下角固定 APlayer 恢复旧教程的毛玻璃、6px 圆角和收起把手；整体上移 56px，展开时不再盖住左下角的 FPS 检测器。</li><li>不再使用的 <code>aplayer-fixed.css</code> 已归档，页面不再引用。</li></ul><h2 id="二、网站统计改成-Umami-直读">二、网站统计改成 Umami 直读</h2><p>Umami 的分享页带有 <code>X-Frame-Options: SAMEORIGIN</code>，iframe 一定会被浏览器拦住。现在改为在前端请求 Umami 的分享接口，直接渲染访客、浏览量、访问次数和平均停留四项数据。</p><p>同时删除了百度统计的图表、脚本和配置；51LA 的脚本、注入和统计页残留也一并清理，页面只保留 Umami 与 GitHub 贡献日历。</p><h2 id="三、页脚徽章">三、页脚徽章</h2><ul><li>主页页脚状态徽章左侧的 <code>Demo</code> 改为 <code>哈基米</code>。</li><li>萌ICP备、Vercel、GitHub、Cloudflare 等徽章恢复旧版的图标/图案，并改用本地资源，避免外链图片失效。</li><li>徽章在鼠标停留或手指按住时，会有一道浅色光带循环扫过；当前动画时长为 1.55s。</li></ul><h2 id="四、繁简转换与翻译">四、繁简转换与翻译</h2><p>主题自带的 <code>#translateLink</code> 只显示「繁」，但 translate.js 3.x 并不会自动绑定这个按钮。现在手动接管点击：在 <code>chinese_simplified</code> 与 <code>chinese_traditional</code> 之间切换，按钮文案同步在「繁 / 简」之间变化。</p><p>另外按旧教程补了翻译语言按钮，点开后可以选择 English、简体中文、繁體中文、한국어、日本語；翻译初始化仍由 <code>qwq.js</code> 负责。</p><h2 id="五、BB-空间与运行时间">五、BB 空间与运行时间</h2><p>BB 空间原来的超大封面卡片换成了紧凑的站点入口卡片，保留「BB动态」和「梦中阁」两个链接。</p><p>页脚「本站运行了」的起算时间之前误写成了 2022-08-09，现按实际情况改为 <strong>2024-02-01</strong>；控制台字符画里的运行天数和版权年份也一起修正。</p><h2 id="验证">验证</h2><p><code>hexo generate --force</code> 构建通过，无 ERROR/WARN；页面交互和截图检查通过。记录这次整修，方便以后回看每一处改动的原因。</p>]]></content>
     
@@ -33,9 +33,9 @@
     <category term="经验" scheme="https://blog.qwqsky.top/categories/%E7%BB%8F%E9%AA%8C/"/>
     
     
-    <category term="前端" scheme="https://blog.qwqsky.top/tags/%E5%89%8D%E7%AB%AF/"/>
-    
     <category term="Blog" scheme="https://blog.qwqsky.top/tags/Blog/"/>
+    
+    <category term="前端" scheme="https://blog.qwqsky.top/tags/%E5%89%8D%E7%AB%AF/"/>
     
     <category term="经验" scheme="https://blog.qwqsky.top/tags/%E7%BB%8F%E9%AA%8C/"/>
     
@@ -60,9 +60,9 @@
     
     <category term="音乐" scheme="https://blog.qwqsky.top/tags/%E9%9F%B3%E4%B9%90/"/>
     
-    <category term="前端" scheme="https://blog.qwqsky.top/tags/%E5%89%8D%E7%AB%AF/"/>
-    
     <category term="Blog" scheme="https://blog.qwqsky.top/tags/Blog/"/>
+    
+    <category term="前端" scheme="https://blog.qwqsky.top/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -142,9 +142,9 @@
     <category term="经验" scheme="https://blog.qwqsky.top/categories/%E7%BB%8F%E9%AA%8C/"/>
     
     
-    <category term="前端" scheme="https://blog.qwqsky.top/tags/%E5%89%8D%E7%AB%AF/"/>
-    
     <category term="Blog" scheme="https://blog.qwqsky.top/tags/Blog/"/>
+    
+    <category term="前端" scheme="https://blog.qwqsky.top/tags/%E5%89%8D%E7%AB%AF/"/>
     
     <category term="代码" scheme="https://blog.qwqsky.top/tags/%E4%BB%A3%E7%A0%81/"/>
     
