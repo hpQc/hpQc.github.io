@@ -276,20 +276,75 @@ function languageBox() {
   languageBox.style.transition = 'right 0.4s ease-in-out'; // 添加动画过渡
 }
 
-//翻译
-translate.selectLanguageTag.languages = 'english,chinese_simplified,chinese_traditional,korean,japanese';
-translate.request.listener.start();
-translate.language.setLocal('chinese_simplified'); //设置本地语种（当前网页的语种）。如果不设置，默认自动识别当前网页显示文字的语种。 可填写如 'english'、'chinese_simplified' 等，具体参见文档下方关于此的说明。
-translate.service.use('client.edge'); //设置机器翻译服务通道，直接客户端本身，不依赖服务端 。相关说明参考 http://translate.zvo.cn/43086.html
-translate.execute();//进行翻译
+//翻译初始化（translate.js 4.x）
+//旧版 3.2.1 没有 service.use / selectLanguageTag.languages / request.listener.start，
+//直接调用会抛 TypeError，把后面所有逻辑（繁简按钮、播放器列表收起）一起中断。
+//所以这里逐项做能力检测，任一环节缺失只跳过该环节，不影响其余功能。
+(function initTranslate() {
+  // 先把真正的 API 对象存一份引用：translate.js 会创建 id="translate" 的容器 div，
+  // 同名 id 的全局访问、以及 translate.js 被重复引入时的自拦截抛错，都可能让之后
+  // 再取全局 translate 时拿到的不是这个对象；繁/简按钮统一走这份引用更稳。
+  if (typeof translate === 'undefined' || !translate || typeof translate.execute !== 'function') {
+    console.warn('[qwq] translate.js 未加载或全局不可用，翻译功能已跳过');
+    return;
+  }
+  window.__qwqTranslate = translate;
 
-// 右下角「繁/简」按钮：translate.js 3.x 本身不绑定 #translateLink，需要手动接管
+  const safe = (label, fn) => {
+    try {
+      fn();
+    } catch (err) {
+      console.warn('[qwq] translate 初始化环节失败已跳过：' + label, err);
+    }
+  };
+
+  // 语言下拉框只保留这五种
+  safe('selectLanguageTag.languages', () => {
+    if (translate.selectLanguageTag && typeof translate.selectLanguageTag === 'object') {
+      translate.selectLanguageTag.languages = 'english,chinese_simplified,chinese_traditional,korean,japanese';
+    }
+  });
+
+  // 本地语种＝简体中文（不设置则由 translate.js 自动识别）
+  safe('language.setLocal', () => {
+    if (translate.language && typeof translate.language.setLocal === 'function') {
+      translate.language.setLocal('chinese_simplified');
+    }
+  });
+
+  // 机器翻译通道：纯客户端 edge，不依赖服务端（文档 http://translate.zvo.cn/43086.html）
+  safe('service.use', () => {
+    if (translate.service && typeof translate.service.use === 'function') {
+      translate.service.use('client.edge');
+    }
+  });
+
+  // 开启动态内容监控：ajax 与 js 改动后的文本也会被翻译
+  safe('request.listener.start', () => {
+    if (translate.request && translate.request.listener && typeof translate.request.listener.start === 'function') {
+      translate.request.listener.start();
+    } else if (translate.listener && typeof translate.listener.start === 'function') {
+      translate.listener.start();
+    }
+  });
+
+  // 执行翻译
+  safe('execute', () => {
+    if (typeof translate.execute === 'function') {
+      translate.execute();
+    }
+  });
+})();
+
+// 右下角「繁/简」按钮：translate.js 本身不绑定 #translateLink，需要手动接管。
+// 必须用 __qwqTranslate 这份引用——页面上的全局 translate 已被 id="translate" 的容器 div 遮蔽。
 (function () {
   const btn = document.getElementById('translateLink');
-  if (!btn || typeof translate === 'undefined' || !translate.changeLanguage) return;
+  const T = window.__qwqTranslate;
+  if (!btn || !T || typeof T.changeLanguage !== 'function') return;
   const isTraditional = () => {
     try {
-      return translate.language.getCurrent() === 'chinese_traditional';
+      return T.language.getCurrent() === 'chinese_traditional';
     } catch (err) {
       return false;
     }
@@ -299,7 +354,7 @@ translate.execute();//进行翻译
   btn.addEventListener('click', function () {
     const target = isTraditional() ? 'chinese_simplified' : 'chinese_traditional';
     btn.textContent = target === 'chinese_traditional' ? '简' : '繁';
-    translate.changeLanguage(target);
+    T.changeLanguage(target);
   });
 })();
 
