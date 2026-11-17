@@ -2,24 +2,32 @@
 const css = `
 .translateSelectLanguage{
   position: fixed;
-  bottom:50px;
-  right:-300px;
-  width: 10%;
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  appearance: none; /* 隐藏默认箭头 */
-  outline: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: rgb(234, 234, 234);
-} 
+  right:-200px;
+  bottom:84px;
+  width:132px;
+  height:40px;
+  box-sizing:border-box;
+  padding:0 26px 0 12px;
+  font:500 14px/38px system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:#333;
+  border:1px solid #d5d5d5;
+  border-radius:8px;
+  background-color:#eaeaea;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 10px center;
+  background-size:12px 8px;
+  box-shadow:0 2px 4px rgba(0,0,0,.1);
+  appearance:none;
+  outline:none;
+  cursor:pointer;
+  transition:right .3s ease,border-color .2s ease,box-shadow .2s ease;
+}
 [data-theme="dark"] .translateSelectLanguage{
-  background-color: rgb(106, 106, 106);
-  color: rgb(234, 234, 234);
+  background-color:#5f5f5f;
+  border-color:#7a7a7a;
+  color:#eaeaea;
+  background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23eaeaea' stroke-width='2'/%3E%3C/svg%3E");
 }
 .translateSelectLanguage:hover {
   border-color: #007bff;
@@ -137,112 +145,6 @@ const css = `
 const style = document.createElement('style');
 style.innerHTML = css;
 document.head.appendChild(style);
-//翻译提醒通知
-// 创建通知容器
-function createNotificationContainer() {
-  let notificationContainer = document.getElementById('translate-notification');
-  if (!notificationContainer) {
-    notificationContainer = document.createElement('div');
-    notificationContainer.id = 'translate-notification';
-    notificationContainer.style.cssText = `
-    position: fixed;
-    width: 50%;
-    min-height: 50px;
-    bottom: 10%;
-    right: 25%;
-    margin: auto;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10000;
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    `;
-    document.body.appendChild(notificationContainer);
-  }
-  return notificationContainer;
-}
-// 显示通知
-function showNotification(message, duration = 5000) {
-  const notification = createNotificationContainer();
-  notification.innerHTML = `
-    ${message}
-    <span style="margin-left: 10px; cursor: pointer; color: #00aaff;" onclick="dismissNotification()">OK</span>
-  `;
-  notification.style.opacity = '1';
-  notification.style.transform = 'translateY(0)';
-
-  // 自动隐藏通知
-  if (duration > 0) {
-    setTimeout(() => {
-      dismissNotification();
-    }, duration);
-  }
-}
-// 隐藏通知
-function dismissNotification() {
-  const notification = document.getElementById('translate-notification');
-  if (notification) {
-    notification.style.opacity = '0';
-    notification.style.transform = 'translateY(20px)';
-    setTimeout(() => {
-      if (notification.parentNode) {
-        notification.parentNode.removeChild(notification);
-      }
-    }, 300);
-  }
-}
-// 提示浏览器翻译功能
-function promptBrowserTranslate(targetLanguage) {
-  const userLanguage = navigator.language || navigator.userLanguage;
-  const htmlLanguage = document.documentElement.lang || 'zh';
-  const isChinesePage = htmlLanguage.startsWith('zh');
-  const isChineseBrowser = userLanguage.startsWith('zh');
-
-  // 如果用户浏览器是中文，且页面语言也是中文，无需翻译
-  if (isChineseBrowser && isChinesePage) {
-
-    return;
-  }
-
-  // 检查用户是否已经处理过通知
-  if (localStorage.getItem('translatePromptAcknowledged') === 'true') {
-
-    return;
-  }
-
-// 非阻塞伪类通知
-showNotification(
-  `Detected that the current page is in Chinese. Would you like to enable the browser's translation feature to translate the page content into ${targetLanguage || 'the target language'}? You can also adjust the language in the blog's bottom-right corner settings - Language.:D`,
-  0 // 不自动关闭，用户必须点击关闭
-);
-
-
-  // 用户确认后记录状态
-  document
-    .getElementById('translate-notification')
-    .querySelector('span')
-    .addEventListener('click', () => {
-      localStorage.setItem('translatePromptAcknowledged', 'true');
-    });
-}
-
-// 页面加载完成事件
-document.addEventListener('DOMContentLoaded', () => {
-
-  promptBrowserTranslate('English');
-});
-
-// PJAX 页面切换完成事件
-document.addEventListener('pjax:complete', () => {
-
-  promptBrowserTranslate('English');
-});
-
 //翻译选择框
 // 控制 .translateSelectLanguage 的显示与隐藏
 function languageBox() {
@@ -255,7 +157,7 @@ function languageBox() {
   const isOpen = languageBox.style.right === '60px';
 
   if (isOpen) {
-    languageBox.style.right = '-300px'; // 隐藏到屏幕外
+    languageBox.style.right = '-200px'; // 隐藏到屏幕外（框宽 132px，留余量）
   } else {
     languageBox.style.right = '60px'; // 显示在屏幕内
 
@@ -263,7 +165,7 @@ function languageBox() {
     const clickHandler = (event) => {
       const target = event.target;
       if (!languageBox.contains(target) && target.closest('.translateSelectLanguage') === null) {
-        languageBox.style.right = '-300px';
+        languageBox.style.right = '-200px';
         document.removeEventListener('click', clickHandler); // 移除事件监听
       }
     };
@@ -273,7 +175,6 @@ function languageBox() {
     }, 0); // 延迟绑定事件，避免点击按钮本身触发隐藏
   }
 
-  languageBox.style.transition = 'right 0.4s ease-in-out'; // 添加动画过渡
 }
 
 //翻译初始化（translate.js 4.x）
